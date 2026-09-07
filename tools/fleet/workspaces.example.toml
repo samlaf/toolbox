@@ -1,0 +1,18 @@
+# Point at machines you have already created. Repo paths only select a workspace;
+# configure mounts/clones and the guest environment yourself for now.
+
+[[workspace]]
+name = "local"
+machine = { backend = "lima", name = "default" }
+repos = [{ path = "~/src/my-project" }]
+tags = ["local"]
+
+[[workspace]]
+name = "gpu"
+machine = { backend = "azure", resource_group = "dev", name = "gpu-dev-1" }
+# Add subscription = "<subscription-id>" inside machine to pin the Azure account.
+ssh = "sam@gpu-dev-1" # Reachable hostname/IP or alias from ~/.ssh/config
+# Alternatively: tailscale = "gpu-dev-1" (uses your default SSH user).
+repos = [{ path = "~/src/my-gpu-project" }]
+tags = ["gpu", "remote"]
+hourly = 3.67 # Your static rate, in your chosen currency; not a billing estimate.
